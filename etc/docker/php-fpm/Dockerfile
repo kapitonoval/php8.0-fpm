@@ -18,4 +18,5 @@ WORKDIR /var/www
 
 CMD composer i -o ; php-fpm
 
+git config  user.email "kapitonoval2012@gmail.com"
 EXPOSE 9000
