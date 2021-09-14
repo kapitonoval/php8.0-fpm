@@ -26,9 +26,16 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
       - ./../../app/public/:/var/www
+      - ./logs/php-fpm/:/var/log/php-fpm
 
   db:
-    image: percona
+    image: library/percona:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./logs/mysql/:/var/log/mysql
+
+networks:
+  dev_environment:
+    name: dev_net
