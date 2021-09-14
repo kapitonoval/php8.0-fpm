@@ -18,6 +18,8 @@ services:
       context: ./php-fpm
     depends_on:
       - db
+    ports:
+      - 9000:9000
     environment:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
