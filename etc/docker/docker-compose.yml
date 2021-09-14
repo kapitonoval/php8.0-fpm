@@ -1,0 +1,32 @@
+version: "2"
+services:
+  pet.nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./../../app/public/:/var/www
+      - ./logs/nginx/:/var/log/nginx
+    depends_on:
+      - php-fpm
+    ports:
+      - 81:80
+      - 444:443
+
+  php-fpm:
+    container_name: php-fpm
+    build:
+      context: ./php-fpm
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - ./../../app/public/:/var/www
+
+  db:
+    image: percona
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
