@@ -29,7 +29,7 @@ services:
       - ./logs/php-fpm/:/var/log/php-fpm
 
   db:
-    image: percona:8.0
+    image: percona
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
